@@ -1,14 +1,16 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import "./App.css";
 
 function App() {
-  const expenseTable = document.querySelector(".expense-table");
-  const [entries, setEntries] = useState([]);
+  
+  const [enteries, setEnteries] = useState(() => {
+    const savedEntries = localStorage.getItem("expenseEntries");
+    return savedEntries ? JSON.parse(savedEntries) : [];
+  });
   const [title, setTitle] = useState("");
   const [cost, setCost] = useState("");
   const [category, setCategory] = useState("");
   const [date, setDate] = useState("");
-  
 
   function handleSetTitle(e) {
     setTitle(e.target.value);
@@ -26,17 +28,23 @@ function App() {
   function handleSubmit(e) {
     e.preventDefault();
     const entry = { title, cost, category, date };
-    setEntries((prevEntries) => {
-      const updatedEntries = [...prevEntries, entry];
-      console.log("Updated Entries:", updatedEntries);
-      return updatedEntries;
+    setEnteries((prevEnteries) => {
+      const updatedEnteries = [...prevEnteries, entry];
+      localStorage.setItem("expenseEntries", JSON.stringify(updatedEnteries));
+      console.log("udatedEnteries", updatedEnteries);
+      return updatedEnteries;
     });
-   
+
     setTitle("");
     setCost("");
     setCategory("");
     setDate("");
   }
+
+  useEffect(() => {
+    localStorage.setItem("expenseEntries", JSON.stringify(enteries));
+  }, [enteries]);
+
   return (
     <div className="container">
       <h2>Expense</h2>
@@ -94,14 +102,35 @@ function App() {
             value={date}
           />
         </label>
-
         <button id="submit-btn" type="submit">
           Submit
         </button>
       </form>
+      {enteries.length > 0 && (
+        <table border={1} className = "expense-table">
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Category</th>
+              <th>Cost</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            {enteries.map(function (item, i) {
+              return (
+                <tr key={i}>
+                  <td>{item.title}</td>
+                  <td>{item.category}</td>
+                  <td>{item.cost}</td>
+                  <td>{item.date}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      )}
     </div>
-    
-
   );
 }
 
