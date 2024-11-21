@@ -25,6 +25,7 @@ const ExpenseList = ({enteries,onDeleteExpense}) => {
                   <td>
                     <button className = "delete-btn" onClick={() => onDeleteExpense(i) }>Delete</button>
                   </td>
+                  
                 </tr>
               );
             })}

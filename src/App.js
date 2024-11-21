@@ -10,28 +10,18 @@ import ExpenseListPage from "./Pages/ExpenseListPage";
 function App() {
   const [enteries, setEnteries] = useState([]);
 
-  const handleSaveExpense = (entry) => {
-    setEnteries([...enteries, entry]);
-  };
+  
 
-  function handleDelete(index) {
-    const updatedExpenses = [...enteries];
-    updatedExpenses.splice(index, 1);
-    setEnteries(updatedExpenses);
-  };
+  
   
   return(
     <BrowserRouter>
     <div className="App">
       <Nav/>
       <Routes>
-      <Route path='/' element={<ExpenseFormPage onAddExpense = {handleSaveExpense} enteries= {enteries} />}></Route>
-      <Route path='/expenses' element={<ExpenseListPage  enteries={enteries} onDeleteExpense = {handleDelete}/>}></Route>
+      <Route path='/' element={<ExpenseFormPage  />}></Route>
+      <Route path='/expenses' element={<ExpenseListPage  />}></Route>
       </Routes>
-
-      
-      <br />
-      
     </div>
     </BrowserRouter>
   );
