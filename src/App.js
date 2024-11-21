@@ -25,15 +25,13 @@ function App() {
     <div className="App">
       <Nav/>
       <Routes>
-      <Route path='/' element={<ExpenseFormPage />}></Route>
-      <Route path='/expenses' element={<ExpenseListPage />}></Route>
+      <Route path='/' element={<ExpenseFormPage onAddExpense = {handleSaveExpense} enteries= {enteries} />}></Route>
+      <Route path='/expenses' element={<ExpenseListPage  enteries={enteries} onDeleteExpense = {handleDelete}/>}></Route>
       </Routes>
 
-      <h1>Form</h1>
-      <ExpenseForm onAddExpense = {handleSaveExpense} enteries= {enteries}/>
+      
       <br />
-      <h1>Expense List</h1>
-      <ExpenseList enteries={enteries} onDeleteExpense = {handleDelete}/>
+      
     </div>
     </BrowserRouter>
   );
