@@ -29,7 +29,7 @@
     background-color: #e6f7ff;
   }
   
-  button {
+  .delete-btn {
     padding: 5px 10px;
     background-color: #ff4d4d;
     color: white;
@@ -39,11 +39,9 @@
     font-size: 12px;
   }
   
-  button:hover {
+  .delete-btn:hover {
     background-color: #e60000;
   }
   
-  button:active {
-    background-color: #cc0000;
-  }
+
   
