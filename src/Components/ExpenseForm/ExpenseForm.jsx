@@ -1,14 +1,34 @@
 import React from "react";
-import { useState,useEffect } from "react";
-import './ExpenseForm.css'
+import { useState, useEffect } from "react";
+import "./ExpenseForm.css";
 
-const ExpenseForm = ({onAddExpense,enteries}) => {
-  
+const ExpenseForm = ({ onAddExpense, editIndex , onEditExpense }) => {
   const [title, setTitle] = useState("");
   const [cost, setCost] = useState("");
   const [category, setCategory] = useState("");
   const [date, setDate] = useState("");
+  
 
+  const expenseDataString = localStorage.getItem("expense_data_key") || "[]";
+  const expenses = JSON.parse(expenseDataString);
+  const prefillIndex = expenses[editIndex];
+
+  useEffect(()=>{
+    if (editIndex > -1) {
+      console.log(prefillIndex);
+      setTitle(prefillIndex.title);
+      setCost(prefillIndex.cost);
+      setCategory(prefillIndex.category);
+      setDate(prefillIndex.date);
+    }
+  },[editIndex]);
+ 
+  function clearEnteries(){
+    setTitle("");
+      setCost("");
+      setCategory("");
+      setDate("");
+  }
   function handleSetTitle(e) {
     setTitle(e.target.value);
   }
@@ -22,15 +42,26 @@ const ExpenseForm = ({onAddExpense,enteries}) => {
     setDate(e.target.value);
   }
 
-
   function handleSubmit(e) {
-    e.preventDefault();
-    const entry = { title, cost, category, date };
-    onAddExpense(entry);
-    setTitle("");
-    setCost("");
-    setCategory("");
-    setDate("");
+    if(editIndex > -1){
+      e.preventDefault(e);
+      const entry = { title, cost, category, date };
+      onEditExpense(entry,editIndex);
+      clearEnteries();
+      
+    }
+    else{
+      e.preventDefault();
+      const entry = { title, cost, category, date };
+      onAddExpense(entry);
+      clearEnteries();
+      // setTitle("");
+      // setCost("");
+      // setCategory("");
+      // setDate("");
+      // setEditIndex(-1);
+    }
+    
   }
 
   return (
@@ -91,9 +122,11 @@ const ExpenseForm = ({onAddExpense,enteries}) => {
             value={date}
           />
         </label>
-        <button id="submit-btn" type="submit">
+        {editIndex > -1 ?<button id="submit-btn" type="submit">
+          Edit Expense
+        </button> :<button id="submit-btn" type="submit">
           Add Expense
-        </button>
+        </button>}
       </form>
     </div>
   );

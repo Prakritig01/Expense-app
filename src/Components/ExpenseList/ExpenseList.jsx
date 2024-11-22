@@ -1,7 +1,7 @@
 import React from 'react';
 import './ExpenseList.css'
 
-const ExpenseList = ({enteries,onDeleteExpense}) => {
+const ExpenseList = ({enteries,onDeleteExpense ,onEditExpense}) => {
   return (
     <div>
       {enteries.length > 0 && (
@@ -25,7 +25,9 @@ const ExpenseList = ({enteries,onDeleteExpense}) => {
                   <td>
                     <button className = "delete-btn" onClick={() => onDeleteExpense(i) }>Delete</button>
                   </td>
-                  
+                  <td>
+                    <button className='edit-btn' onClick={()=> onEditExpense(i)}> Edit</button>
+                  </td>
                 </tr>
               );
             })}
