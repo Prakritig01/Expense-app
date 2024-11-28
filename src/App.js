@@ -15,8 +15,8 @@ function App() {
     <div className="App">
       <Nav/>
       <Routes>
-      <Route path='/' element={<ExpenseFormPage editIndex={editIndex}  />}></Route>
-      <Route path='/expenses' element={<ExpenseListPage  setEditIndex = {setEditIndex}   />}></Route>
+      <Route path='/' element={<ExpenseFormPage editIndex={editIndex}  setEditIndex = {setEditIndex}  />}></Route>
+      <Route path='/expenses' element={<ExpenseListPage editIndex={editIndex} setEditIndex = {setEditIndex}    />}></Route>
       </Routes>
     </div>
     </BrowserRouter>

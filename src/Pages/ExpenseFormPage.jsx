@@ -2,8 +2,9 @@ import React from "react";
 import ExpenseForm from "../Components/ExpenseForm/ExpenseForm";
 import { useNavigate } from "react-router-dom";
 import { getExpense,setExpense } from "../Services/localStorage";
+import ExpenseListPage from "./ExpenseListPage";
 
-const ExpenseFormPage = ({ editIndex}) => {
+const ExpenseFormPage = ({ editIndex,setEditIndex}) => {
   const navigate = useNavigate();
   
   const expenses = getExpense();
@@ -24,7 +25,8 @@ const ExpenseFormPage = ({ editIndex}) => {
   return (
     <div>
       <h1>Form</h1>
-      <ExpenseForm onAddExpense={handleSaveExpense} editIndex={editIndex} onEditExpense = {handleEditExpense} />
+      <ExpenseForm onAddExpense={handleSaveExpense} editIndex={editIndex} onEditExpense = {handleEditExpense} setEditIndex = {setEditIndex}  key = {editIndex} />
+      
     </div>
   );
 };

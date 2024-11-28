@@ -10,63 +10,50 @@ import {
 import { getExpense } from "../../Services/localStorage";
 
 const emptyForm = () => ({
-  title : '',
-  cost : '',
-  category : '',
-  date : ''
+  title: "",
+  cost: "",
+  category: "",
+  date: "",
 });
 
-const formValuesFromLocalStorage = (indx) =>{
-  const expenses  = getExpense();
+const formValuesFromLocalStorage = (indx) => {
+  const expenses = getExpense();
   return expenses[indx];
-}
+};
 
-const ExpenseForm = ({ onAddExpense, editIndex, onEditExpense}) => {
-  const prefilledForm = editIndex > -1 ? formValuesFromLocalStorage(editIndex) : emptyForm();    //Purpose: Initializes the form with either existing values or empty form
-  const [formValues,setFormValues] = useState(prefilledForm);          //Purpose: Tracks the live, current data in the form as the user interacts with it.
-
-  // const [title, setTitle] = useState("");
-  // const [cost, setCost] = useState("");
-  // const [category, setCategory] = useState("");
-  // const [date, setDate] = useState("");
-
+const ExpenseForm = ({ onAddExpense, editIndex, onEditExpense,setEditIndex }) => {
+  const prefilledForm =
+    editIndex > -1 ? formValuesFromLocalStorage(editIndex) : emptyForm(); //Purpose: Initializes the form with either existing values or empty form
+  const [formValues, setFormValues] = useState(prefilledForm); //Purpose: Tracks the live, current data in the form as the user interacts with it.
 
   //field value-accessors and updaters  or simply "field handlers."
-  const [title,setTitle] = [formValues.title, (val)=> setFormValues({...formValues ,title: val})];           
-  const [cost,setCost]  = [formValues.cost, (val) => setFormValues ({...formValues, cost : val})];
-  const [category,setCategory]  = [formValues.category, (val) => setFormValues ({...formValues, category : val})];
-  const [date,setDate]  = [formValues.date, (val) => setFormValues ({...formValues, date : val})];
+  const [title, setTitle] = [
+    formValues.title,
+    (val) => setFormValues({ ...formValues, title: val }),
+  ];
+  const [cost, setCost] = [
+    formValues.cost,
+    (val) => setFormValues({ ...formValues, cost: val }),
+  ];
+  const [category, setCategory] = [
+    formValues.category,
+    (val) => setFormValues({ ...formValues, category: val }),
+  ];
+  const [date, setDate] = [
+    formValues.date,
+    (val) => setFormValues({ ...formValues, date: val }),
+  ];
 
-
- 
-  const setSingleValue = (value,key) =>{
-    const replacer = (currentState) =>{
-      const finalState = {...currentState , [key] : value};
-      return finalState;
-    }
-    setFormValues(replacer);
-  }
-
-  
-  function clearEnteries() {
-    setTitle("");
-    setCost("");
-    setCategory("");
-    setDate("");
-  }
 
   function handleSubmit(e) {
+    e.preventDefault(e);
+    const entry = { title, cost, category, date };
     if (editIndex > -1) {
-      e.preventDefault(e);
-      const entry = { title, cost, category, date };
       onEditExpense(entry, editIndex);
-      clearEnteries();
     } else {
-      e.preventDefault();
-      const entry = { title, cost, category, date };
       onAddExpense(entry);
-      clearEnteries();
     }
+    setEditIndex(-1);
   }
 
   const submitButtonText = editIndex > -1 ? "Edit Expense" : "Add Expense";
