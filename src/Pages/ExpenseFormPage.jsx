@@ -1,15 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import ExpenseForm from "../Components/ExpenseForm/ExpenseForm";
 import { useNavigate } from "react-router-dom";
-import { getExpense,setExpense } from "../Services/localStorage";
-import ExpenseListPage from "./ExpenseListPage";
+import {ExpenseContext} from './../Components/Context/ExpenseContext';
 
-const ExpenseFormPage = ({ editIndex,setEditIndex,expenseState,setExpenseState}) => {
+
+const ExpenseFormPage = () => {
   const navigate = useNavigate();
   
-
+  const {editIndex,expenseState,setExpenseState} = useContext(ExpenseContext)
   let expenses = [...expenseState];
-  console.log("expenses:"  ,expenses);
 
   const handleSaveExpense = (entry) => {
     expenses.push(entry);
@@ -28,7 +27,7 @@ const ExpenseFormPage = ({ editIndex,setEditIndex,expenseState,setExpenseState})
   return (
     <div>
       <h1>Form</h1>
-      <ExpenseForm onAddExpense={handleSaveExpense} editIndex={editIndex} onEditExpense = {handleEditExpense} setEditIndex = {setEditIndex}  key = {editIndex}  expenseState= {expenseState}/>
+      <ExpenseForm onAddExpense={handleSaveExpense}  onEditExpense = {handleEditExpense}  key = {editIndex} />
       
     </div>
   );

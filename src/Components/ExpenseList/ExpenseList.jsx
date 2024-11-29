@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import './ExpenseList.css'
+import ExpenseContext from '../Context/ExpenseContext';
 
-const ExpenseList = ({enteries,expenseState,onDeleteExpense ,onEditExpense }) => {
+const ExpenseList = ({onDeleteExpense,onEditExpense }) => {
+  const {expenseState} = useContext(ExpenseContext);
   return (
     <div>
       {expenseState.length > 0 && (

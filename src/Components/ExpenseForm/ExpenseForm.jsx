@@ -1,5 +1,5 @@
-import React from "react";
-import { useState, useEffect } from "react";
+import React, { useContext } from "react";
+import { useState } from "react";
 import "./ExpenseForm.css";
 import {
   TitleInput,
@@ -7,7 +7,7 @@ import {
   CostInput,
   DateInput,
 } from "../Inputs/Inputs";
-import { getExpense } from "../../Services/localStorage";
+import {ExpenseContext} from './../Context/ExpenseContext';
 
 const emptyForm = () => ({
   title: "",
@@ -22,7 +22,8 @@ const formValuesFromLocalStorage = (indx,expenseState) => {
   return expenses[indx];
 };
 
-const ExpenseForm = ({ onAddExpense, editIndex, onEditExpense,setEditIndex,expenseState }) => {
+const ExpenseForm = ({ onAddExpense, onEditExpense }) => {
+  const {editIndex,setEditIndex,expenseState} = useContext(ExpenseContext);
   const prefilledForm =
     editIndex > -1 ? formValuesFromLocalStorage(editIndex,expenseState) : emptyForm(); //Purpose: Initializes the form with either existing values or empty form
   const [formValues, setFormValues] = useState(prefilledForm); //Purpose: Tracks the live, current data in the form as the user interacts with it.

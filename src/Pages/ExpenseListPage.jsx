@@ -1,21 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import ExpenseList from "../Components/ExpenseList/ExpenseList";
-import { useState } from "react";
 import {  useNavigate } from "react-router-dom";
+import ExpenseContext from "../Components/Context/ExpenseContext";
 
-const ExpenseListPage = ({editIndex,setEditIndex,expenseState,setExpenseState}) => {
+const ExpenseListPage = () => {
   const navigate = useNavigate();
   
+  const {setEditIndex,expenseState,setExpenseState} = useContext(ExpenseContext);
 
   const expenses = [...expenseState];
   
-  function useForceUpdate() {                                      
-    const [value,setValue] = useState(0);
-    return () => setValue((value) => value + 1);
-  };
+  
 
-
-  const forceUpdate = useForceUpdate();
 
   const handleDelete = (index) => {
     expenses.splice(index, 1);
@@ -31,7 +27,7 @@ const ExpenseListPage = ({editIndex,setEditIndex,expenseState,setExpenseState}) 
   return (
     <div>
       <h1>Expense List</h1>
-      <ExpenseList enteries={expenses} onDeleteExpense={handleDelete} onEditExpense={handleEdit} expenseState = {expenseState} />
+      <ExpenseList  onDeleteExpense={handleDelete} onEditExpense={handleEdit}  />
     </div>
   );
 };
