@@ -1,10 +1,10 @@
 import React from 'react';
 import './ExpenseList.css'
 
-const ExpenseList = ({enteries,onDeleteExpense ,onEditExpense}) => {
+const ExpenseList = ({enteries,expenseState,onDeleteExpense ,onEditExpense }) => {
   return (
     <div>
-      {enteries.length > 0 && (
+      {expenseState.length > 0 && (
         <table border={1} className="expense-table">
           <thead>
             <tr>
@@ -15,7 +15,7 @@ const ExpenseList = ({enteries,onDeleteExpense ,onEditExpense}) => {
             </tr>
           </thead>
           <tbody>
-            {enteries.map(function (item, i) {
+            {expenseState.map(function (item, i) {
               return (
                 <tr key={i}>
                   <td>{item.title}</td>

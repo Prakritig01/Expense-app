@@ -16,14 +16,15 @@ const emptyForm = () => ({
   date: "",
 });
 
-const formValuesFromLocalStorage = (indx) => {
-  const expenses = getExpense();
+const formValuesFromLocalStorage = (indx,expenseState) => {
+  // const expenses = getExpense();
+  const expenses = expenseState;
   return expenses[indx];
 };
 
-const ExpenseForm = ({ onAddExpense, editIndex, onEditExpense,setEditIndex }) => {
+const ExpenseForm = ({ onAddExpense, editIndex, onEditExpense,setEditIndex,expenseState }) => {
   const prefilledForm =
-    editIndex > -1 ? formValuesFromLocalStorage(editIndex) : emptyForm(); //Purpose: Initializes the form with either existing values or empty form
+    editIndex > -1 ? formValuesFromLocalStorage(editIndex,expenseState) : emptyForm(); //Purpose: Initializes the form with either existing values or empty form
   const [formValues, setFormValues] = useState(prefilledForm); //Purpose: Tracks the live, current data in the form as the user interacts with it.
 
   //field value-accessors and updaters  or simply "field handlers."

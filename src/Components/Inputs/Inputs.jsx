@@ -11,6 +11,7 @@ export const TitleInput = ({ title, onChange }) => {
           id="title"
           onChange={(e) => onChange(e.target.value)}
           value={title}
+          required
         />
       </label>
     </div>
@@ -27,6 +28,7 @@ export const CategoryInput = ({ category, onChange }) => {
           id="expense-category"
           value={category}
           onChange={(e) => onChange(e.target.value)}
+          required
         >
           <option value="" disabled>
             Select Category
@@ -55,6 +57,7 @@ export const CostInput = ({ cost, onChange }) => {
           placeholder="eg. 30"
           onChange={(e) => onChange(e.target.value)}
           value={cost}
+          required
         />
       </label>
     </div>
@@ -72,6 +75,7 @@ export const DateInput = ({ date, onChange }) => {
           id="date"
           onChange={(e) => onChange(e.target.value)}
           value={date}
+          required
         />
       </label>
     </div>
