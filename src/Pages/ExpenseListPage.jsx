@@ -2,20 +2,19 @@ import React, { useContext } from "react";
 import ExpenseList from "../Components/ExpenseList/ExpenseList";
 import {  useNavigate } from "react-router-dom";
 import ExpenseContext from "../Components/Context/ExpenseContext";
+import { getExpensesFromBackend, setExpensesInBackend } from "../Services/localStorage";
 
 const ExpenseListPage = () => {
   const navigate = useNavigate();
   
   const {setEditIndex,expenseState,setExpenseState} = useContext(ExpenseContext);
-
+  getExpensesFromBackend().then(expenseVal => setExpenseState(expenseVal));
   const expenses = [...expenseState];
-  
-  
-
 
   const handleDelete = (index) => {
     expenses.splice(index, 1);
     setExpenseState(expenses);
+    setExpensesInBackend(expenses);
   }
 
   const handleEdit = (index) => {

@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import './ExpenseList.css'
 import ExpenseContext from '../Context/ExpenseContext';
-
 const ExpenseList = ({onDeleteExpense,onEditExpense }) => {
   const {expenseState} = useContext(ExpenseContext);
   return (
