@@ -4,7 +4,7 @@ const sleep = ms => new Promise(r => setTimeout(r,ms));
 export async function getExpensesFromBackend(){
     const expenseDataString = localStorage.getItem(EXPENSE_DATA_KEY) || "[]";
     const expenses = JSON.parse(expenseDataString);
-    await sleep(0);
+    await sleep(1000);
     return expenses;
 }
 

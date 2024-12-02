@@ -8,7 +8,6 @@ const ExpenseListPage = () => {
   const navigate = useNavigate();
   
   const {setEditIndex,expenseState,setExpenseState} = useContext(ExpenseContext);
-  getExpensesFromBackend().then(expenseVal => setExpenseState(expenseVal));
   const expenses = [...expenseState];
 
   const handleDelete = (index) => {

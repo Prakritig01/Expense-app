@@ -27,6 +27,7 @@ const ExpenseForm = ({ onAddExpense, onEditExpense }) => {
   const prefilledForm =
     editIndex > -1 ? formValuesFromLocalStorage(editIndex,expenseState) : emptyForm(); //Purpose: Initializes the form with either existing values or empty form
   const [formValues, setFormValues] = useState(prefilledForm); //Purpose: Tracks the live, current data in the form as the user interacts with it.
+  //form ki state, hosakta hai vo values change hi nai karei
 
   //field value-accessors and updaters  or simply "field handlers."
   const [title, setTitle] = [
