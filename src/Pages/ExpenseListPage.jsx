@@ -7,20 +7,21 @@ import { getExpensesFromBackend, setExpensesInBackend } from "../Services/localS
 const ExpenseListPage = () => {
   const navigate = useNavigate();
   
-  const {setEditIndex,expenseState,setExpenseState} = useContext(ExpenseContext);
+  const {setEditIndex,expenseState,dispatch} = useContext(ExpenseContext);
   const expenses = [...expenseState];
 
   const handleDelete = (index) => {
     expenses.splice(index, 1);
-    setExpenseState(expenses);
-    setExpensesInBackend(expenses);
+    dispatch({
+      type : 'DELETE',
+      payload : {index},
+    });
+    
   }
 
   const handleEdit = (index) => {
     setEditIndex(index);
     navigate('/');
-    
-    
   }
   return (
     <div>

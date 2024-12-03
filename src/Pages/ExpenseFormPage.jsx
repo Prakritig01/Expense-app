@@ -8,21 +8,23 @@ import {setExpensesInBackend} from './../Services/localStorage';
 const ExpenseFormPage = () => {
   const navigate = useNavigate();
   
-  const {editIndex,expenseState,setExpenseState} = useContext(ExpenseContext)
+  const {editIndex,expenseState,dispatch} = useContext(ExpenseContext)
   let expenses = [...expenseState];
 
   const handleSaveExpense = (entry) => {
-    expenses.push(entry);
-    setExpensesInBackend(expenses);
-    setExpenseState(expenses);
+    dispatch({
+      type : 'ADD',
+      payload : entry,
+    });
     navigate("/expenses");
   };
 
   const handleEditExpense = (entry,index) =>{
-    expenses[index] = entry; 
-    console.log("handleEditExpense function ",expenses[index]);
-    setExpensesInBackend(expenses);
-    setExpenseState(expenses);
+    console.log("handleEditExpense function ");
+    dispatch({
+      type : 'EDIT',
+      payload : {entry,index},
+    });
     navigate("/expenses");
   }
 

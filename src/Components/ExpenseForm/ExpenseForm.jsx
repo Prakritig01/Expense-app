@@ -17,7 +17,6 @@ const emptyForm = () => ({
 });
 
 const formValuesFromLocalStorage = (indx,expenseState) => {
-  // const expenses = getExpense();
   const expenses = expenseState;
   return expenses[indx];
 };
