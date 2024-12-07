@@ -1,0 +1,67 @@
+/* General styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Page container */
+  .filter-section {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+    margin: 20px 0;
+  }
+  
+  /* Button styles */
+  button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  
+  /* Toggle Button */
+  .toggle-btn {
+    background-color: #007bff;
+    color: white;
+    margin-right: 10px;
+  }
+  
+  .toggle-btn:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Filter Button */
+  .filter-btn {
+    background-color: #28a745;
+    color: white;
+  }
+  
+  .filter-btn:hover {
+    background-color: #1e7e34;
+  }
+  
+  /* Filter dropdown */
+  .filter-section select {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+  }
+  
+  /* Layout alignment */
+  h1 {
+    margin-top: 20px;
+    text-align: center;
+  }
+  
+  .filter-section {
+    margin: 20px auto;
+    display: flex;
+    justify-content: center;
+  }
+  
+  

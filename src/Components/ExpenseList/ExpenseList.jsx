@@ -1,11 +1,13 @@
 import React, { useContext } from 'react';
 import './ExpenseList.css'
 import ExpenseContext from '../Context/ExpenseContext';
-const ExpenseList = ({onDeleteExpense,onEditExpense }) => {
-  const {expenseState} = useContext(ExpenseContext);
+const ExpenseList = ({expenses,navigateFunc}) => {
+  
+  const {expenseState,handleDelete,handleEdit} = useContext(ExpenseContext);
+  console.log("expenses" ,expenses);
   return (
     <div>
-      {expenseState.length > 0 && (
+      { expenses.length > 0 && (
         <table border={1} className="expense-table">
           <thead>
             <tr>
@@ -16,18 +18,18 @@ const ExpenseList = ({onDeleteExpense,onEditExpense }) => {
             </tr>
           </thead>
           <tbody>
-            {expenseState.map(function (item, i) {
+            {expenses.map(function(item, i) {
               return (
-                <tr key={i}>
+                <tr key={item.id}>
                   <td>{item.title}</td>
                   <td>{item.category}</td>
                   <td>{item.cost}</td>
                   <td>{item.date}</td>
                   <td>
-                    <button className = "delete-btn" onClick={() => onDeleteExpense(i) }>Delete</button>
+                    <button className = "delete-btn" onClick={() => handleDelete(item.id) }>Delete</button>
                   </td>
                   <td>
-                    <button className='edit-btn' onClick={()=> onEditExpense(i)}> Edit</button>
+                    <button className='edit-btn' onClick={()=> {handleEdit(item.id); navigateFunc()}}> Edit</button>
                   </td>
                 </tr>
               );

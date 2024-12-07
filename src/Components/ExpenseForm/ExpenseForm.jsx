@@ -51,7 +51,7 @@ const ExpenseForm = ({ onAddExpense, onEditExpense }) => {
     e.preventDefault(e);
     const entry = { title, cost, category, date };
     if (editIndex > -1) {
-      onEditExpense(entry, editIndex);
+      onEditExpense(entry, formValues.id);
     } else {
       onAddExpense(entry);
     }

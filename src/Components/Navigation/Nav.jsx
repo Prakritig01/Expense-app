@@ -7,7 +7,7 @@ const Nav = () => {
     <div>
       <nav className='tab'>
         <NavLink to= "/" className= "tabLink">Expense Form</NavLink>
-        <NavLink to= "/expenses" className= "tabLink">Expense List</NavLink>
+        <NavLink to= "/view" className= "tabLink">Expense View</NavLink>
       </nav>
     </div>
   )
