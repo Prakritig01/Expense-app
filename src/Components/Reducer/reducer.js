@@ -15,9 +15,10 @@ export function reducer(state, action) {
       if (isInvalidState(state, action)) {
         return state;
       }
-      const {id} = action.payload.id;
+      const {id} = action.payload;
+      // console.log("item to be deleted id :" ,id);
       const updatedState = [...state];
-      const index = updatedState.find((item) => item[id] === id);
+      const index = updatedState.findIndex((item) => item[id] === id);
       updatedState.splice(index, 1); //use filter instead
       return updatedState;
     }

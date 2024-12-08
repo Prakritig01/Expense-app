@@ -16,15 +16,15 @@ const emptyForm = () => ({
   date: "",
 });
 
-const formValuesFromLocalStorage = (indx,expenseState) => {
-  const expenses = expenseState;
-  return expenses[indx];
+const formValuesFromLocalStorage = (id,expenseState) => {
+  const expenses = expenseState.find(expense => expense.id === id);
+  return expenses;
 };
 
 const ExpenseForm = ({ onAddExpense, onEditExpense }) => {
-  const {editIndex,setEditIndex,expenseState} = useContext(ExpenseContext);
+  const {editID,setEditId,expenseState} = useContext(ExpenseContext);
   const prefilledForm =
-    editIndex > -1 ? formValuesFromLocalStorage(editIndex,expenseState) : emptyForm(); //Purpose: Initializes the form with either existing values or empty form
+    editID > -1 ? formValuesFromLocalStorage(editID,expenseState) : emptyForm(); //Purpose: Initializes the form with either existing values or empty form
   const [formValues, setFormValues] = useState(prefilledForm); //Purpose: Tracks the live, current data in the form as the user interacts with it.
   //form ki state, hosakta hai vo values change hi nai karei
 
@@ -50,15 +50,15 @@ const ExpenseForm = ({ onAddExpense, onEditExpense }) => {
   function handleSubmit(e) {
     e.preventDefault(e);
     const entry = { title, cost, category, date };
-    if (editIndex > -1) {
+    if (editID > -1) {
       onEditExpense(entry, formValues.id);
     } else {
       onAddExpense(entry);
     }
-    setEditIndex(-1);
+    setEditId(-1);
   }
 
-  const submitButtonText = editIndex > -1 ? "Edit Expense" : "Add Expense";
+  const submitButtonText = editID > -1 ? "Edit Expense" : "Add Expense";
 
   return (
     <div className="container">

@@ -14,7 +14,7 @@ import { reducer } from "../Reducer/reducer";
 export const ExpenseContext = createContext();
 
 export const ExpenseContextProvider = ({ children }) => {
-  const [editIndex, setEditIndex] = useState(-1);
+  const [editID, setEditId] = useState(-1);
   const [expenseState, dispatch] = useReducer(reducer, []);
   const [toggle, setToggle] = useState(false);
 
@@ -39,13 +39,14 @@ export const ExpenseContextProvider = ({ children }) => {
   }, [expenseState]);
 
   const handleDelete = (id) => {
+    // console.log("Delete id in delete" ,id);
     dispatch({
       type: "DELETE",
       payload: { id },
     });
   };
-  const handleEdit = (index) => {
-    setEditIndex(index);
+  const handleEdit = (id) => {
+    setEditId(id);
   };
 
   const handleToggleView = () => {
@@ -54,8 +55,8 @@ export const ExpenseContextProvider = ({ children }) => {
   return (
     <ExpenseContext.Provider
       value={{
-        editIndex,
-        setEditIndex,
+        editID,
+        setEditId,
         expenseState,
         dispatch,
         handleDelete,

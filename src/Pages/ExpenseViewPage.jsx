@@ -12,7 +12,7 @@ const ExpenseViewPage = () => {
   const [selecedCategory,setSelectedCategory] = useState("All");
   const filteredExpenses = selecedCategory === "All" ? expenseState : expenseState.filter((expense) => expense.category === selecedCategory);
   const navigate = useNavigate();
-  console.log("filteredlist :" , filteredExpenses);
+  // console.log("filteredlist :" , filteredExpenses);
 
   const navigateFunc = () => {
     navigate('/');
