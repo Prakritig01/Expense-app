@@ -13,13 +13,8 @@ import ExpenseList from "../Components/ExpenseList/ExpenseList";
 const ExpenseViewPage = () => {
   const { toggle, handleToggleView, expenseState } = useContext(ExpenseContext);
 
-  // Use filterReducer to manage filter state
-  const [filterState, filterDispatch] = useReducer(
-    filterReducer,
-    initialFilterState
-  );
+  const [selectedCategory, filterDispatch] = useReducer(filterReducer, "All");
 
-  const { selectedCategory } = filterState;
 
   const filteredExpenses =
     selectedCategory === "All"
