@@ -3,26 +3,23 @@ import ExpenseForm from "../Components/ExpenseForm/ExpenseForm";
 import { useNavigate } from "react-router-dom";
 import {ExpenseContext} from './../Components/Context/ExpenseContext';
 import {setExpensesInBackend} from './../Services/localStorage';
+import { useDispatch } from "react-redux";
+import { addExpense,editExpense } from "../slices/expenseSlice";
 
 
 const ExpenseFormPage = () => {
   const navigate = useNavigate();
-  
-  const {editIndex,dispatch} = useContext(ExpenseContext)
+  const dispatchFromRedux = useDispatch();
+   
+  const {editIndex} = useContext(ExpenseContext);
 
   const handleSaveExpense = (entry) => {
-    dispatch({
-      type : 'ADD',
-      payload : entry,
-    });
+    dispatchFromRedux(addExpense(entry));
     navigate("/view");
   };
 
-  const handleEditExpense = (entry,id) =>{
-    dispatch({
-      type : 'EDIT',
-      payload : {entry,id},
-    });
+  const handleEditExpense = (expense,id) =>{
+    dispatchFromRedux(editExpense({ id,expense }))
     navigate("/view");
   }
 

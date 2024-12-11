@@ -1,20 +1,23 @@
 import React, { useContext, useState, useReducer } from "react";
 import { useNavigate } from "react-router-dom";
-import {
-  filterReducer,
-  initialFilterState,
-} from "../Components/Reducer/filterReducer";
-
+import { filterReducer } from "../Components/Reducer/filterReducer";
+import { useSelector } from "react-redux";
+import { getExpensesFromList } from "../slices/expenseSlice";
 import "./ExpenseViewPage.css";
 import ExpenseContext from "../Components/Context/ExpenseContext";
 import ExpenseCard from "../Components/ExpenseCard/ExpenseCard";
 import ExpenseList from "../Components/ExpenseList/ExpenseList";
+import { getCategoryFromList } from "../slices/filterSlice";
+import { useDispatch } from "react-redux";
+import { setCategory } from "../slices/filterSlice";
 
 const ExpenseViewPage = () => {
-  const { toggle, handleToggleView, expenseState } = useContext(ExpenseContext);
+  const dispatchFromRedux = useDispatch();
 
-  const [selectedCategory, filterDispatch] = useReducer(filterReducer, "All");
+  const { toggle, handleToggleView } = useContext(ExpenseContext);
 
+  const expenseState = useSelector(getExpensesFromList);
+  const selectedCategory = useSelector(getCategoryFromList);
 
   const filteredExpenses =
     selectedCategory === "All"
@@ -37,12 +40,7 @@ const ExpenseViewPage = () => {
           name=""
           id=""
           value={selectedCategory}
-          onChange={(e) =>
-            filterDispatch({
-              type: "SET_CATEGORY",
-              payload: e.target.value,
-            })
-          }
+          onChange={(e) => dispatchFromRedux(setCategory(e.target.value))}
         >
           <option value="All">All</option>
           <option value="Food">Food</option>

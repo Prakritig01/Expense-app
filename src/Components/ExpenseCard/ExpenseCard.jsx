@@ -24,6 +24,7 @@ const ExpenseCard = ({ expenses, navigateFunc }) => {
           <button
             className="edit-btn"
             onClick={() => {
+              console.log("epense id" ,expense.id);
               handleEdit(expense.id);
               navigateFunc();
             }}

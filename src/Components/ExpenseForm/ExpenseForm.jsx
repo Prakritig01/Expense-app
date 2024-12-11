@@ -8,6 +8,8 @@ import {
   DateInput,
 } from "../Inputs/Inputs";
 import {ExpenseContext} from './../Context/ExpenseContext';
+import { useSelector } from "react-redux";
+import {getExpensesFromList} from './../../slices/expenseSlice'
 
 const emptyForm = () => ({
   title: "",
@@ -22,7 +24,8 @@ const formValuesFromLocalStorage = (id,expenseState) => {
 };
 
 const ExpenseForm = ({ onAddExpense, onEditExpense }) => {
-  const {editID,setEditId,expenseState} = useContext(ExpenseContext);
+  const {editID,setEditId} = useContext(ExpenseContext);
+  const expenseState = useSelector(getExpensesFromList);
   const prefilledForm =
     editID > -1 ? formValuesFromLocalStorage(editID,expenseState) : emptyForm(); //Purpose: Initializes the form with either existing values or empty form
   const [formValues, setFormValues] = useState(prefilledForm); //Purpose: Tracks the live, current data in the form as the user interacts with it.
