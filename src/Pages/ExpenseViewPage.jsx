@@ -19,10 +19,12 @@ const ExpenseViewPage = () => {
   const expenseState = useSelector(getExpensesFromList);
   const selectedCategory = useSelector(getCategoryFromList);
 
+
   const filteredExpenses =
     selectedCategory === "All"
       ? expenseState
       : expenseState.filter((expense) => expense.category === selectedCategory);
+
 
   const navigate = useNavigate();
   const navigateFunc = () => navigate("/");

@@ -2,14 +2,10 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const filterSlice = createSlice({
     name : "filterNameInSlice",
-    initialState: {
-        selectedCategory: "All", // Top-level property
-      },
+    initialState : "All",
     reducers: {
-        setCategory : (state, action) => {
-            // console.log(action.payload);
-            const newCategory  = action.payload;
-            state.selectedCategory = newCategory;
+        setCategory : (state,action) => {
+            return action.payload;
         }
     }
 });
@@ -18,4 +14,4 @@ export const {setCategory} = filterSlice.actions;
 
 export default filterSlice.reducer;
 
-export const getCategoryFromList = (state) => state.filterKeyInStore.selectedCategory;
+export const getCategoryFromList = (state) => state.filterKeyInStore;
