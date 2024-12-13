@@ -7,10 +7,24 @@ const expenseSlice = createSlice({
     list: [
       {
         date: "2024-12-08",
-        cost: 350,
+        cost: 550,
         title: "Burger",
         category: "Food",
         id: 0,
+      },
+      {
+        date: "2024-12-08",
+        cost: 350,
+        title: "Noodles",
+        category: "Food",
+        id: 1,
+      },
+      {
+        date: "2024-12-08",
+        cost: 450,
+        title: "Jacket",
+        category: "Clothes",
+        id: 2,
       },
     ],
   },
@@ -20,7 +34,7 @@ const expenseSlice = createSlice({
         ...action.payload,
         id: getNewId(state.list),
       };
-      console.log("newExpense", newExpense);
+      // console.log("newExpense", newExpense);
       state.list.push(newExpense);
     },
     editExpense: (state, action) => {

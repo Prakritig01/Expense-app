@@ -3,6 +3,7 @@ import ExpenseContext from "../Context/ExpenseContext";
 import "./ExpenseCard.css";
 
 const ExpenseCard = ({ expenses, navigateFunc }) => {
+  // console.log("expenses incard:",expenses);
   const { handleDelete, handleEdit } = useContext(ExpenseContext);
   return (
     <div className="Expense-cards-container">

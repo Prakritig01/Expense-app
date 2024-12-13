@@ -1,28 +1,16 @@
-import React, {
-  createContext,
-  useEffect,
-  useReducer,
-  useState,
-  navigate,
-} from "react";
-import {
-  setExpensesInBackend,
-  getExpensesFromBackend,
-} from "./../../Services/localStorage";
-import { reducer } from "../Reducer/reducer";
-import { useDispatch } from "react-redux";
+import React, {createContext,useState} from "react";
 import { deleteExpense } from "../../slices/expenseSlice";
-
+import { useDispatch } from "react-redux";
 export const ExpenseContext = createContext();
 
 export const ExpenseContextProvider = ({ children }) => {
+  const dispatch = useDispatch();
   const [editID, setEditId] = useState(-1);
-
   const [toggle, setToggle] = useState(false);
-
+  const [reverse,setReverse] = useState(false);
 
   const handleDelete = (id) => {
-    dispatch(deleteExpense({id}));
+    dispatch(deleteExpense({ id }));
   };
   const handleEdit = (id) => {
     setEditId(id);
@@ -31,6 +19,10 @@ export const ExpenseContextProvider = ({ children }) => {
   const handleToggleView = () => {
     setToggle((prev) => !prev);
   };
+
+  const handleReverseView = () => {
+    setReverse((prev) => !prev);
+  }
   return (
     <ExpenseContext.Provider
       value={{
@@ -40,6 +32,8 @@ export const ExpenseContextProvider = ({ children }) => {
         handleEdit,
         toggle,
         handleToggleView,
+        reverse,
+        handleReverseView
       }}
     >
       {children}

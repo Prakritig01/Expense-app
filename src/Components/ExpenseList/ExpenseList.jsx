@@ -3,10 +3,17 @@ import './ExpenseList.css'
 import ExpenseContext from '../Context/ExpenseContext';
 const ExpenseList = ({expenses,navigateFunc}) => {
   
-  const {expenseState,handleDelete,handleEdit} = useContext(ExpenseContext);
+  const {expenseState,handleDelete,handleEdit,reverse,handleReverseView} = useContext(ExpenseContext);
   console.log("expenses" ,expenses);
+  const reverseText = reverse ? "Latest" : "Old";
+
+  if(reverse === true){
+    expenses = [...expenses].reverse();
+    // console.log("filtered Expenses after if" ,filteredExpenses);
+  }
   return (
     <div>
+      <button onClick={handleReverseView} className='order-btn'>{reverseText}</button>
       { expenses.length > 0 && (
         <table border={1} className="expense-table">
           <thead>

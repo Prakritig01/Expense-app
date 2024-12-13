@@ -42,6 +42,12 @@
   .delete-btn:hover {
     background-color: #e60000;
   }
+
+  .order-btn{
+    position: relative;
+    bottom: 18.4vh;
+    left: 8%;
+  }
   
 
   
