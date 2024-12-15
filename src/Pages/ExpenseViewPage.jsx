@@ -8,9 +8,9 @@ import ExpenseCard from "../Components/ExpenseCard/ExpenseCard";
 import ExpenseList from "../Components/ExpenseList/ExpenseList";
 import {
   getCategoryFromList,
-  getFilteredExpensesFromList,
   getSortParameterFromList,
-  getFilteredAndSortedExpensesFromList
+  getFilteredAndSortedExpensesFromList,
+  sortOptions
 } from "../slices/filterSlice";
 import { useDispatch } from "react-redux";
 import { setCategory, setSortType } from "../slices/filterSlice";
@@ -20,22 +20,25 @@ const ExpenseViewPage = () => {
 
   const { toggle, handleToggleView } = useContext(ExpenseContext);
 
-  const expenseState = useSelector(getExpensesFromList);
+  
   const selectedCategory = useSelector(getCategoryFromList);
-  console.log("selectedCategory",selectedCategory);
+  console.log("selectedCategory", selectedCategory);
   const selectedSortParameter = useSelector(getSortParameterFromList);
-  console.log("selectedSortParameter",selectedSortParameter);
+  console.log("selectedSortParameter", selectedSortParameter);
 
   const filteredExpenses = useSelector(
-getFilteredAndSortedExpensesFromList(selectedCategory,selectedSortParameter)
+    getFilteredAndSortedExpensesFromList(
+      selectedCategory,
+      selectedSortParameter
+    )
   );
-  console.log("filteredExpenses",filteredExpenses);
+  console.log("filteredExpenses", filteredExpenses);
 
   const navigate = useNavigate();
   const navigateFunc = () => navigate("/");
 
   const buttonText = toggle ? "List" : "Cards";
-
+  // const sortOptions = selectSortOptions;
 
   return (
     <div>
@@ -61,39 +64,18 @@ getFilteredAndSortedExpensesFromList(selectedCategory,selectedSortParameter)
       </div>
       <div className="sort-section">
         <p>Sort on the basis of :</p>
-        <label>
-          <input
-            type="radio"
-            name="sort"
-            id=""
-            className="sort-section-label"
-            value="Cost"
-            onChange={(e) => dispatchFromRedux(setSortType(e.target.value))}
-          />{" "}
-          Cost
-        </label>
-        <label>
-          <input
-            type="radio"
-            name="sort"
-            id=""
-            className="sort-section-label"
-            value="Date"
-            onChange={(e) => dispatchFromRedux(setSortType(e.target.value))}
-          />{" "}
-          Date
-        </label>
-        <label>
-          <input
-            type="radio"
-            name="sort"
-            id=""
-            className="sort-section-label"
-            value="Title"
-            onChange={(e) => dispatchFromRedux(setSortType(e.target.value))}
-          />{" "}
-          Title
-        </label>
+        {sortOptions.map((option) => (
+          <label key={option}>
+            <input
+              type="radio"
+              name="sort"
+              className="sort-section-label"
+              value={option}
+              onChange={(e) => dispatchFromRedux(setSortType(e.target.value))}
+            />{" "}
+            {option}
+          </label>
+        ))}
       </div>
 
       <h1>{toggle ? "Expense List" : "Expense Card"}</h1>

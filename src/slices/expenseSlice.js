@@ -30,6 +30,7 @@ const expenseSlice = createSlice({
   },
   reducers: {
     addExpense: (state, action) => {
+      console.log(action.payload);
       const newExpense = {
         ...action.payload,
         id: getNewId(state.list),
